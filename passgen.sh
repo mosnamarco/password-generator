@@ -23,7 +23,7 @@ Usage example
 '
 
 showHelp() {
-	echo "Help is on the way"
+    echo -e  "Usage:\npassgen -h\t\t\tshow help menu\npassgen <string> <num>\t\tgenerate password from string with length num\npassgen -i\t\t\tnteractive mode"
 }
 
 generatePassword() {
@@ -51,7 +51,7 @@ handleCreate() {
 	read -p "Password length: " length 
 	read -p "Number of passwords: " num
 
-	for ((i=1; i<$num; i++)); do
+	for ((i=0; i<$num; i++)); do
 		generatePassword $characters $length "append"
 	done
 
@@ -129,9 +129,9 @@ handleInteractiveMode() {
 if [ -z "$1" ]  &&  [ -z "$2" ]; then
 	default="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()"
 	generatePassword "$default" 8 
-elif [ "$1" = "-h" ]; then
+elif [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
 	showHelp
-elif [ "$1" = "-i" ]; then
+elif [ "$1" = "-i" ] || [ "$1" = "-interactive" ]; then
 	handleInteractiveMode
 else
 	generatePassword "$1" "$2"
